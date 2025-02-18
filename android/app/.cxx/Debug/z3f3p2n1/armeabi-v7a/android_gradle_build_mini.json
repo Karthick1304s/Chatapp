@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/karthick/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/karthick/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/karthick/Documents/Programs/Flutter/chartapp/android/app/.cxx/Debug/z3f3p2n1/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/karthick/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/karthick/Documents/Programs/Flutter/chartapp/android/app/.cxx/Debug/z3f3p2n1/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

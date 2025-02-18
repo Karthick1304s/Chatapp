@@ -1,3 +1,4 @@
+import 'package:chartapp/auth/auth_service.dart';
 import 'package:chartapp/components/my_button.dart';
 import 'package:chartapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +7,38 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _conformPasswordController =
-      TextEditingController();
+  final TextEditingController _cPasswordController = TextEditingController();
   final void Function()? onTap;
-  RegisterPage({super.key,this.onTap});
-  void register() {}
+  RegisterPage({super.key, this.onTap});
+  void register(BuildContext context) {
+    final _auth = AuthService();
+    if (_passwordController.text == _cPasswordController.text) {
+      try {
+        _auth.signupWithEmailPassword(
+            _emailController.text, _passwordController.text);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(
+              e.toString(),
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        );
+      }
+    } else if (_passwordController.text != _cPasswordController.text) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            "Password does not Match",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +67,7 @@ class RegisterPage extends StatelessWidget {
             //name
             MyTextfield(
               hintText: "Name",
-              hide: true,
+              hide: false,
               controller: _nameController,
             ),
             const SizedBox(height: 20),
@@ -52,7 +80,7 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 20),
             //password
             MyTextfield(
-              hintText: "Password",
+              hintText: "Password (6 char)",
               hide: true,
               controller: _passwordController,
             ),
@@ -60,14 +88,17 @@ class RegisterPage extends StatelessWidget {
 
             //conform password
             MyTextfield(
-              hintText: "Conform Password",
+              hintText: "Confirm Password",
               hide: true,
-              controller: _conformPasswordController,
+              controller: _cPasswordController,
             ),
             const SizedBox(height: 20),
 
             //button
-            MyButton(name: "Register", onTap: register),
+            MyButton(
+              name: "Register",
+              onTap: () => register(context),
+            ),
 
             const SizedBox(height: 25),
 
@@ -81,7 +112,6 @@ class RegisterPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-
                 GestureDetector(
                   onTap: onTap,
                   child: Text(

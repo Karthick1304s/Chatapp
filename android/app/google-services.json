@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "130113914243",
+    "project_id": "chatapp-cd3fb",
+    "storage_bucket": "chatapp-cd3fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130113914243:android:f715bc6d401a8dc630a2b6",
+        "android_client_info": {
+          "package_name": "com.example.chartapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKQamLg7xsosAGctFb6GSLStAlnwLRPrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

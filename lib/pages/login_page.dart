@@ -1,3 +1,4 @@
+import 'package:chartapp/auth/auth_service.dart';
 import 'package:chartapp/components/my_button.dart';
 import 'package:chartapp/components/my_textfield.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,27 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final void Function()? onTap;
-  LoginPage({super.key,required this.onTap});
-  void login() {}
-  
+  LoginPage({super.key, required this.onTap});
+  void login(BuildContext context) async {
+    //service
+    final authService = AuthService();
+
+    //login
+    try {
+      await authService.signWithEmailPassword(
+          _emailController.text, _passwordController.text);
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            e.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +69,10 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             //button
-            MyButton(name: "Login", onTap: login),
+            MyButton(
+              name: "Login",
+              onTap: () => login(context),
+            ),
 
             const SizedBox(height: 25),
 
@@ -64,7 +86,6 @@ class LoginPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
-
                 GestureDetector(
                   onTap: onTap,
                   child: Text(
